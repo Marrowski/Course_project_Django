@@ -32,10 +32,21 @@ from main.views import samsung_page
 from main.views import motorola_page
 from main.views import apple_page
 from main.views import jbl_page
+from main.views import vinga_headphones
+from main.views import genius_page
+from main.views import trust_page
+from main.views import nvidia_page
+from main.views import intel_page
+from main.views import matplat_page
+from main.views import kingston_page
+from main.views import landuary_page
+from main.views import indesit_page
+from main.views import fridge_page
+from main.views import dahati_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main/', main_page),
+    path('main/', main_page, name='main'),
     path('computers/', computers_category, name='computers'),
     path('smartphones/', smartphones_category, name='smartphones'),
     path('audiotech/', audiotech_category, name='audio'),
@@ -49,5 +60,16 @@ urlpatterns = [
     path('samsung/', samsung_page, name='samsung'),
     path('motorola/', motorola_page, name='motorola'),
     path('apple/', apple_page, name='apple'),
-    path('jbl/', jbl_page, name='jbl')
+    path('jbl/', jbl_page, name='jbl'),
+    path('vinga_head/', vinga_headphones, name='vinga_a'),
+    path('genius/', genius_page, name='genius'),
+    path('trust/', trust_page, name='trust'),
+    path('nvidia', nvidia_page, name='nvidia'),
+    path('intel/', intel_page, name='intel'),
+    path('mat/', matplat_page, name='tuf'),
+    path('kingston/', kingston_page, name='kingston'),
+    path('landuary/', landuary_page, name='lan'),
+    path('indesit/', indesit_page, name='indesit'),
+    path('bosch/', fridge_page, name='bosch'),
+    path('dahati/', dahati_page, name='dahati')
 ]
