@@ -1,0 +1,27 @@
+{% extends 'main/index.html' %}
+{% load static %}
+{% block title %} Список товарів {% endblock %}
+{% block content %}
+<div class="product-container">
+    <div class="products">
+        {% for product in product_list %}
+        <div class="product">
+            <a href="">
+                {% for im in product.photos.all %}
+                <img src="{{ im.image.url}}" alt="{{ product.name_product }}" width="250">
+                {% endfor %}
+                <h3>{{ product.name_product }}</h3>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="price">Ціна: {{ product.price }} грн</p>
+                {% if product.sell_price %}
+                <p class="price">Знижена ціна: {{ product.sell_price }} грн</p>
+                {% endif %}
+                {% if product.product_variation %}
+                <p>Варіація: {{ product.variation }}</p>
+                {% endif %}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

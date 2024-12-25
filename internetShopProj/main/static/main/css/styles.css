@@ -1,0 +1,312 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Мінімальна висота для тіла */
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    margin-right: 20px;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.menu-button {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+.menu-button:hover {
+    background: #444;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background: #444;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.navbar li:hover .dropdown {
+    display: block;
+}
+
+.dropdown li {
+    display: block;
+}
+
+.dropdown li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.dropdown li a:hover {
+    background: #555;
+}
+
+.logo {
+    flex-grow: 1;
+    text-align: center;
+}
+
+main {
+    flex: 1; /* Основний контент займає доступний простір */
+    padding: 20px; /* Відступи для основного контенту */
+}
+
+.product-container {
+    max-width: 1200px; /* Максимальна ширина контейнера продуктів */
+    margin: 20px auto; /* Центрування контейнера */
+    padding: 0 15px; /* Внутрішні відступи */
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap; /* Дозволяє переходити на новий рядок */
+    gap: 20px; /* Відстань між картками продуктів */
+    justify-content: center; /* Центрування карток продуктів */
+}
+
+.product {
+    background: #fff; /* Білий фон для картки продукту */
+    border: 2px solid #ddd; /* Ширша сіра рамка */
+    border-radius: 10px; /* Закруглені кути */
+    width: 100%; /* Займає всю ширину контейнера */
+    max-width: none; /* Знімаємо обмеження на максимальну ширину */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкий тіньовий ефект */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавний перехід для ефектів */
+    overflow: hidden; /* Акуратне обрізання зайвих елементів */
+    text-align: center; /* Центрування тексту */
+    padding: 15px; /* Внутрішні відступи */
+}
+
+.product img {
+    max-width: 100%; /* Максимальна ширина зображення */
+    height: 250px; /* Висота зображення */
+    object-fit: cover; /* Збереження пропорцій зображення */
+    border-bottom: 2px solid #ddd; /* Лінія між зображенням та текстом */
+    border-radius: 10px 10px 0 0; /* Закруглені кути для зображення */
+}
+
+.product h3 {
+    font-size: 1.5rem; /* Розмір заголовка продукту */
+    margin: 10px 0; /* Відстань між заголовком та текстом */
+    color: #333; /* Колір заголовка */
+}
+
+.price {
+    font-weight: bold; /* Жирний шрифт для ціни */
+    color: #28a745; /* Основна ціна зеленого кольору */
+    margin: 5px 0; /* Відстань між цінами */
+    font-size: 1.2rem; /* Розмір шрифту для ціни */
+}
+
+.price.discounted {
+    color: #dc3545; /* Знижена ціна червоного кольору */
+    text-decoration: line-through; /* Перекреслена стара ціна */
+}
+
+.product-description {
+    font-size: 0.9rem; /* Розмір шрифту опису продукту */
+    color: #666; /* Колір опису */
+    margin: 5px 0; /* Відстань між описом та іншими елементами */
+}
+
+.product:hover {
+    transform: translateY(-5px); /* Підняття картки при наведенні */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Посилення тіні при наведенні */
+}
+
+
+
+
+
+button {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+.logout-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Якщо ви вирішите додати футер, ось базові стилі для нього */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.auth-form {
+    background: #fff; /* Білий фон для форм */
+    border-radius: 10px; /* Закруглені кути */
+    padding: 20px; /* Внутрішні відступи */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тінь для форм */
+    max-width: 400px; /* Максимальна ширина форм */
+    margin: 20px auto; /* Центрування форм з відступом зверху і знизу */
+}
+
+h2 {
+    text-align: center; /* Центрування заголовка */
+    margin-bottom: 15px; /* Відстань між заголовком і формою */
+}
+
+p {
+    text-align: center; /* Центрування тексту */
+    margin-top: 15px; /* Відстань між формою і текстом */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Відстань між групами полів */
+}
+
+.form-group label {
+    display: block; /* Відображення міток як блочні елементи */
+    margin-bottom: 5px; /* Відстань між міткою та полем вводу */
+    font-weight: bold; /* Жирний шрифт для міток */
+}
+
+.form-group input {
+    width: 100%; /* Ширина полів вводу на всю ширину контейнера */
+    padding: 10px; /* Внутрішні відступи для полів вводу */
+    border: 1px solid #ddd; /* Сіра рамка */
+    border-radius: 5px; /* Закруглені кути для полів вводу */
+    transition: border-color 0.3s; /* Плавний перехід для кольору рамки */
+}
+
+.form-group input:focus {
+    border-color: #28a745; /* Зелена рамка при фокусі */
+    outline: none; /* Вимкнення стандартного обведення */
+}
+
+button {
+    width: 100%; /* Кнопка на всю ширину */
+    background: #28a745; /* Зелений фон */
+    color: #fff; /* Білий текст */
+    border: none; /* Без рамки */
+    padding: 10px; /* Внутрішні відступи */
+    border-radius: 5px; /* Закруглені кути */
+    cursor: pointer; /* Курсор у вигляді руки */
+    transition: background-color 0.3s; /* Плавний перехід для фону */
+}
+
+button:hover {
+    background: #218838; /* Темніший зелений при наведенні */
+}
+
+.products_a {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    gap: 20px; /* Расстояние между элементами */
+    justify-content: center; /* Центрирование элементов */
+    padding: 20px; /* Отступ внутри контейнера */
+}
+
+.product_a {
+    background: #fff; /* Белый фон для каждого блока */
+    border: 2px solid #ddd; /* Серая рамка */
+    border-radius: 10px; /* Закругленные углы */
+    width: 300px; /* Фиксированная ширина для каждого блока */
+    text-align: center; /* Центрирование текста и содержимого */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Эффект при наведении */
+    overflow: hidden; /* Убирает выступающие элементы */
+    padding: 15px; /* Внутренние отступы */
+}
+
+.product_a img {
+    max-width: 100%; /* Изображение не выходит за пределы блока */
+    height: 200px; /* Фиксированная высота изображения */
+    object-fit: cover; /* Обрезка изображения, чтобы оно сохраняло пропорции */
+    border-bottom: 2px solid #ddd; /* Отделение изображения от текста */
+    border-radius: 10px 10px 0 0; /* Закругленные верхние углы */
+    margin-bottom: 15px; /* Отступ под изображением */
+}
+
+.product_a p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.product_a a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product_a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-button {
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.login-button:hover {
+    background-color: green;
+    transform: translateY(-2px);
+}

@@ -1,0 +1,19 @@
+{% extends 'main/index.html' %}
+{% block content %}
+ <main class="container">
+        <h2>Логін</h2>
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Електронна пошта</label>
+                <input type="email" id="email" name="email" value="{{email}}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" value="{{password}}" required>
+            </div>
+            <button type="submit">Увійти</button>
+        </form>
+        <p>Ще не маєте акаунту? <a href="{% url 'register' %}">Зареєструватися</a></p>
+    </main>
+{% endblock %}

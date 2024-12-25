@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтернет-магазин</title>
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li>
+                    <a href="#" class="menu-button">Меню</a>
+                    <ul class="dropdown">
+                        <li><a href="{% url 'index' %}">Головна</a></li>
+                        <li><a href="#">Мій кошик</a></li>
+                        <li><a href="#">Про нас</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="logo">
+            <h1>Мій Інтернет-магазин</h1>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+            <p>Вітаємо, {{ user.email }}!</p>
+            <a href="{% url 'logout' %}" class="logout-button">Вихід</a>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="login-button">Вхід</a>
+        {% endif %}
+    </header>
+
+    <main>
+        <div class="products_a">
+            {% block content %}
+            {% for category in category_list %}
+            <div class="product_a">
+                <a href="{% url 'category_products' category.id %}">
+                    <p>{{ category.name_category }}</p>
+                    <img src="{{ category.image_category.url }}" alt="{{ category.name_category }}" width="250">
+                </a>
+            </div>
+            {% endfor %}
+            {% endblock %}
+        </div>
+    </main>
+</body>
+</html>
