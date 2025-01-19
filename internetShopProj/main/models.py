@@ -1,5 +1,9 @@
+import hashlib
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.http import HttpRequest, HttpResponse
+
 
 class UserProfile(models.Model):
     phone = models.CharField(max_length=12)
@@ -40,4 +44,23 @@ class Photo(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='photos')
     image = models.ImageField(blank=True, upload_to='images/')
 
+
+class Cart(models.Model):
+    user = models.ForeignKey(User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='carts'
+    )
+
+    def get_total_price(self):
+        return sum(item.get_total_price() for item in self.items.all())
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def get_total_price(self):
+        return self.product.sell_price() * self.quantity
 

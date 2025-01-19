@@ -1,0 +1,31 @@
+{% extends 'main/index.html' %}
+{% block title %}Кошик{% endblock %}
+{% block content %}
+<main>
+    <div class="product-container">
+        <h1>Ваш кошик</h1>
+        <ul class="cart-items">
+            {% for item in cart.items.all %}
+            <li class="cart-item">
+                <div class="cart-item-details">
+                    <span class="product-name">{{ item.product.name_product }}</span>
+                    <span class="product-quantity">{{ item.quantity }} x</span>
+                    <span class="product-price">{{ item.product.sell_price }} грн</span>
+                    <span class="product-total">= {{ item.get_total_price }} грн</span>
+
+                    {% with item.product.photos.all|first as photo %}
+                    <img src="{{ photo.image.url }}" alt="{{ item.product.name_product }}" class="cart-item-image">
+                    {% endwith %}
+                </div>
+
+                <a class="remove-button logout-button" href="{% url 'cart_remove' item.product.id %}">Видалити</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <p class="total-price">Загальна сума: <strong>{{ cart.get_total_price }} грн</strong></p>
+
+        <a class="continue-shopping button" href="{% url 'index' %}">Продовжити покупки</a>
+        <a class="checkout-button button" href="{% url 'delivery' %}">Оформити замовлення</a> <!-- Кнопка для оформлення замовлення -->
+    </div>
+</main>
+{% endblock %}

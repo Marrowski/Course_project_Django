@@ -1,0 +1,60 @@
+{% extends 'main/index.html' %}
+{% block title %}Оформлення замовлення{% endblock %}
+
+{% block content %}
+<div class="delivery-container">
+    <h2 class="about-title">Оформлення замовлення</h2>
+    <label for="cityModalCheckbox" class="btn-submit">Вибрати місто</label>
+    <input type="checkbox" id="cityModalCheckbox" class="modal-checkbox">
+    <div class="modal">
+        <div class="modal-content">
+            <label for="cityModalCheckbox" class="close-modal">×</label>
+            <h3>Введіть назву міста</h3>
+            <form method="get" action="" class="city-form">
+                <label for="city">Місто:</label>
+                <input type="text" id="city" name="city" placeholder="Наприклад, Київ" value="{{ city_name }}" required>
+                <button type="submit" class="btn-submit">Шукати відділення</button>
+            </form>
+        </div>
+    </div>
+
+    {% if data %}
+        <label for="warehouses">Виберіть відділення:</label>
+        <select id="warehouses" class="warehouse-select">
+            <option value="" disabled selected>Оберіть відділення</option>
+            {% for info in data %}
+                <option value="{{ warehouse.SiteKey }}">{{ info.Description }}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <p>Немає відділень для даного міста</p>
+    {% endif %}
+
+    <h3>Ваші товари</h3>
+    {% if cart.items.all %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Ціна</th>
+                    <th>Кількість</th>
+                    <th>Разом</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                <tr>
+                    <td>{{ item.product.name_product }}</td>
+                    <td>{{ item.product.sell_price }} грн</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.get_total_price }} грн</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p><strong>Загальна сума:</strong> {{ cart.get_total_price }} грн</p>
+    {% else %}
+        <p>У кошику немає товарів</p>
+    {% endif %}
+</div>
+{% endblock %}

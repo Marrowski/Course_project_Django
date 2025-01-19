@@ -1,0 +1,101 @@
+{% extends 'main/index.html' %}
+{% block title %} {{ product.name }} {% endblock %}
+{% block content %}
+<main>
+    <div class="product-container">
+        <div class="product">
+            {% for photo in photos %}
+            <img src="{{ photo.image.url }}" alt="{{ product.name_product }}">
+            {% endfor %}
+            <h3>{{ product.name_product }}</h3>
+            <p class="price">
+                {{ product.sell_price }}
+                {% if product.discount_price %}
+                <span class="discounted">ЗНИЖКА - {{ product.discount_price }} гривень</span>
+                {% endif %}
+            </p>
+            <p class="product-description">{{ product.description }}</p>
+            {% if product.variation %}
+            <p class="product-variation">{{ product.variation }}</p>
+            {% endif %}
+            <button id="add_to_cart_{{ product.id }}" class="add_to_cart_button" data-product-id="{{ product.id }}">
+                Додати до кошика
+            </button>
+        </div>
+    </div>
+</main>
+
+<form id="csrf_form" style="display: none;">
+    {% csrf_token %}
+</form>
+
+<div class="custom-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <p class="modal-message"></p>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const addToCartButtons = document.querySelectorAll('.add_to_cart_button');
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const modal = document.querySelector('.custom-modal');
+    const modalMessage = modal.querySelector('.modal-message');
+    const closeModalButton = modal.querySelector('.close-modal');
+
+    const showModal = (message) => {
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+
+        setTimeout(() => {
+            modal.style.bottom = '30px';
+        }, 10);
+
+
+        setTimeout(() => {
+            modal.style.bottom = '-100px';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
+        }, 3000);
+    };
+
+    closeModalButton.addEventListener('click', () => {
+        modal.style.bottom = '-100px';
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 500);
+    });
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = button.getAttribute('data-product-id');
+
+            fetch(`/cart/add/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ quantity: 1 })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Помилка при додаванні до кошика');
+            })
+            .then(data => {
+                showModal(data.message);
+            })
+            .catch(error => {
+                console.error(error);
+                showModal('Сталася помилка, спробуйте ще раз.');
+            });
+        });
+    });
+});
+
+</script>
+{% endblock %}

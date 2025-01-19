@@ -2,11 +2,24 @@
 {% load static %}
 {% block title %} Список товарів {% endblock %}
 {% block content %}
-<div class="product-container">
+<div class="filter-page">
+    <div class="filter-container">
+        <form method="get" action="">
+            <h3>Фільтрувати за ціною</h3>
+            <label for="min_price">Мін. ціна:</label>
+            <input type="number" name="min_price" id="min_price" value="{{ request.GET.min_price|default:0 }}">
+
+            <label for="max_price">Макс. ціна:</label>
+            <input type="number" name="max_price" id="max_price" value="{{ request.GET.max_price|default:100000 }}">
+
+            <button type="submit" class="filter-button">Застосувати</button>
+        </form>
+    </div>
+
     <div class="products">
         {% for product in product_list %}
         <div class="product">
-            <a href="">
+            <a href="{% url 'product' product.id %}">
                 {% for im in product.photos.all %}
                 <img src="{{ im.image.url}}" alt="{{ product.name_product }}" width="250">
                 {% endfor %}
@@ -17,7 +30,7 @@
                 <p class="price">Знижена ціна: {{ product.sell_price }} грн</p>
                 {% endif %}
                 {% if product.product_variation %}
-                <p>Варіація: {{ product.variation }}</p>
+                <p>Варіація: {{ product.product_variation }}</p>
                 {% endif %}
             </a>
         </div>
