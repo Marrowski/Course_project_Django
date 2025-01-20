@@ -27,7 +27,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', index, name='index'),
+    path(, index, name='index'),
     path('register/', register, name='register'),
     path('login/', auth, name='login'),
     path('logout', logout_view, name='logout'),
